@@ -1,0 +1,26 @@
+From 7d22eb654825b78b7affe4c7ce95f934e4d63800 Mon Sep 17 00:00:00 2001
+From: xuchunmei <xuchunmei@huawei.com>
+Date: Fri, 1 Feb 2019 03:05:22 -0500
+Subject: [PATCH] change the default value of tunable_reverse_lookup_enable
+
+Signed-off-by: xuchunmei <xuchunmei@huawei.com>
+---
+ tunables.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tunables.c b/tunables.c
+index a7ce9c8..eeec860 100644
+--- a/tunables.c
++++ b/tunables.c
+@@ -224,7 +224,7 @@ tunables_load_defaults()
+   tunable_mdtm_write = 1;
+   tunable_lock_upload_files = 1;
+   tunable_pasv_addr_resolve = 0;
+-  tunable_reverse_lookup_enable = 1;
++  tunable_reverse_lookup_enable = 0;
+   tunable_userlist_log = 0;
+   tunable_debug_ssl = 0;
+   tunable_require_cert = 0;
+-- 
+1.8.3.1
+
