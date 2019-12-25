@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.3
-Release:       29
+Release:       30
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -17,7 +17,7 @@ Source6:       vsftpd.service
 Source7:       vsftpd@.service
 Source8:       vsftpd.target
 Source9:       vsftpd-generator
-
+Source10:      vsftpd.default.log
 BuildRequires: pam-devel libcap-devel openssl-devel systemd
 Requires:      logrotate
 
@@ -107,7 +107,7 @@ install -Dm755 vsftpd  %{buildroot}%{_sbindir}/vsftpd
 install -Dm600 vsftpd.conf %{buildroot}%{_sysconfdir}/vsftpd/vsftpd.conf
 install -Dm644 vsftpd.conf.5 %{buildroot}/%{_mandir}/man5/vsftpd.conf.5
 install -Dm644 vsftpd.8 %{buildroot}/%{_mandir}/man8/vsftpd.8
-install -Dm644 RedHat/vsftpd.log %{buildroot}%{_sysconfdir}/logrotate.d/vsftpd
+install -Dm644 %{SOURCE10} %{buildroot}%{_sysconfdir}/logrotate.d/vsftpd
 install -Dm644 %{SOURCE2} %{buildroot}%{_sysconfdir}/pam.d/vsftpd
 install -m600 %{SOURCE3} %{buildroot}%{_sysconfdir}/vsftpd/ftpusers
 install -m600 %{SOURCE4} %{buildroot}%{_sysconfdir}/vsftpd/user_list
@@ -147,5 +147,11 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Fri Dec 20 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.0.3-30
+- Type:bugfix
+- Id:NA
+- SUG:NA
+- DESC: add vsftpd.default.log
+
 * Tue Sep 10 2019 huzhiyu<huzhiyu1@huawei.com> - 3.0.3-29
 - Package init
