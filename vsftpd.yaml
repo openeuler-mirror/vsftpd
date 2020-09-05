@@ -1,0 +1,4 @@
+version_control: github
+src_repo: dagwieers/vsftpd
+tag_prefix: ^v
+separator: .
