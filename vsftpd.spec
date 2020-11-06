@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.3
-Release:       30
+Release:       31
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -19,7 +19,7 @@ Source8:       vsftpd.target
 Source9:       vsftpd-generator
 Source10:      vsftpd.default.log
 BuildRequires: pam-devel libcap-devel openssl-devel systemd
-Requires:      logrotate
+Requires:      logrotate vsftpd-help
 
 #patches from redhat see descriptions in each patch file for detailed information
 Patch1:        0001-Don-t-use-the-provided-script-to-locate-libraries.patch
@@ -147,6 +147,12 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Fri Nov 06 2020 gaihuiying <gaihuiying1@huawei.com> - 3.0.3-31
+- Type:requirement
+- Id:NA
+- SUG:NA
+- DESC: add vsftpd-help dependency for vsftpd
+
 * Fri Dec 20 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.0.3-30
 - Type:bugfix
 - Id:NA
