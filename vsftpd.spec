@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.3
-Release:       30
+Release:       31
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -147,6 +147,12 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Sat Sep 05 2020 zengwefeng<zwfeng@huawei.com> - 3.0.3-31
+- Type:NA
+- Id:NA
+- SUG:NA
+- DESC: add yaml file
+
 * Fri Dec 20 2019 openEuler Buildteam <buildteam@openeuler.org> - 3.0.3-30
 - Type:bugfix
 - Id:NA
