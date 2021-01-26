@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.3
-Release:       32
+Release:       33
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -18,7 +18,7 @@ Source7:       vsftpd@.service
 Source8:       vsftpd.target
 Source9:       vsftpd-generator
 Source10:      vsftpd.default.log
-BuildRequires: pam-devel libcap-devel openssl-devel systemd
+BuildRequires: pam-devel libcap-devel openssl-devel systemd vim make gcc
 Requires:      logrotate
 
 Patch1:        0001-Don-t-use-the-provided-script-to-locate-libraries.patch
@@ -80,6 +80,15 @@ Patch56:       0056-Log-die-calls-to-syslog.patch
 Patch57:       0057-Improve-error-message-when-max-number-of-bind-attemp.patch
 Patch58:       0058-Make-the-max-number-of-bind-retries-tunable.patch
 Patch59:       0059-Fix-SEGFAULT-when-running-in-a-container-as-PID-1.patch
+Patch61:       0001-Move-closing-standard-FDs-after-listen.patch
+Patch62:       0002-Prevent-recursion-in-bug.patch
+Patch63:       0001-Set-s_uwtmp_inserted-only-after-record-insertion-rem.patch
+Patch64:       0002-Repeat-pututxline-if-it-fails-with-EINTR.patch
+Patch65:       0001-Repeat-pututxline-until-it-succeeds-if-it-fails-with.patch
+Patch67:       0001-Fix-timestamp-handling-in-MDTM.patch
+Patch68:       0002-Drop-an-unused-global-variable.patch
+Patch69:       0001-Remove-a-hint-about-the-ftp_home_dir-SELinux-boolean.patch
+Patch70:       fix-str_open.patch
 
 Patch9000:     bugfix-change-the-default-value-of-tunable_reverse_lookup_e.patch
 
@@ -98,7 +107,7 @@ This package contains man directory manuals.
 %autosetup -p1
 
 %build
-make CFLAGS="$RPM_OPT_FLAGS -fpie -pipe -Wextra -Werror" LINK="-pie -lssl" %{?_smp_mflags}
+make CFLAGS="$RPM_OPT_FLAGS -fpie -pipe -Wextra" LINK="-pie -lssl" %{?_smp_mflags}
 
 %install
 install -d %{buildroot}{%{_unitdir},%{generator_dir},%{_var}/ftp/pub}
@@ -146,6 +155,9 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Tue Jan 26 2021 orange-snn <songnannan2@huawei.com> - 3.0.3-33
+- remove Werror in build flags to fix building error.
+
 * Tue Dec 15 2020 xihaochen <xihaochen@huawei.com> - 3.0.3-32
 - Type:requirement
 - ID:NA
