@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.3
-Release:       31
+Release:       32
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -18,7 +18,7 @@ Source7:       vsftpd@.service
 Source8:       vsftpd.target
 Source9:       vsftpd-generator
 Source10:      vsftpd.default.log
-BuildRequires: pam-devel libcap-devel openssl-devel systemd
+BuildRequires: pam-devel libcap-devel openssl-devel systemd vim make gcc
 Requires:      logrotate vsftpd-help
 
 #patches from redhat see descriptions in each patch file for detailed information
@@ -81,6 +81,15 @@ Patch56:       0056-Log-die-calls-to-syslog.patch
 Patch57:       0057-Improve-error-message-when-max-number-of-bind-attemp.patch
 Patch58:       0058-Make-the-max-number-of-bind-retries-tunable.patch
 Patch59:       0059-Fix-SEGFAULT-when-running-in-a-container-as-PID-1.patch
+Patch60:       0001-Move-closing-standard-FDs-after-listen.patch
+Patch61:       0002-Prevent-recursion-in-bug.patch
+Patch62:       0001-Set-s_uwtmp_inserted-only-after-record-insertion-rem.patch
+Patch63:       0002-Repeat-pututxline-if-it-fails-with-EINTR.patch
+Patch64:       0001-Repeat-pututxline-until-it-succeeds-if-it-fails-with.patch
+Patch65:       0001-Fix-timestamp-handling-in-MDTM.patch
+Patch66:       0002-Drop-an-unused-global-variable.patch
+Patch67:       0001-Remove-a-hint-about-the-ftp_home_dir-SELinux-boolean.patch
+Patch68:       fix-str_open.patch
 
 Patch9000:     bugfix-change-the-default-value-of-tunable_reverse_lookup_e.patch
 
@@ -147,6 +156,12 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Sat Jan 30 2021 zhuqingfu <zhuqingfu1@huawei.com> - 3.0.3-32
+- Type:bugfix
+- Id:NA
+- SUG:NA
+- DESC: add patches for vsftpd
+
 * Fri Nov 06 2020 gaihuiying <gaihuiying1@huawei.com> - 3.0.3-31
 - Type:requirement
 - Id:NA
