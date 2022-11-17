@@ -41,9 +41,9 @@ index c362983..22b69b3 100644
    BIO* p_bio, int oper, const char* p_arg, int argi, long argl, long retval);
  static int ssl_verify_callback(int verify_ok, X509_STORE_CTX* p_ctx);
 +static DH *ssl_tmp_dh_callback(SSL *ssl, int is_export, int keylength);
- static int ssl_cert_digest(
-   SSL* p_ssl, struct vsf_session* p_sess, struct mystr* p_str);
- static void maybe_log_shutdown_state(struct vsf_session* p_sess);
+ static int ssl_alpn_callback(SSL* p_ssl,
+                              const unsigned char** p_out,
+                              unsigned char* outlen,
 @@ -51,6 +54,60 @@ static int ssl_read_common(struct vsf_session* p_sess,
  static int ssl_inited;
  static struct mystr debug_str;
@@ -147,11 +147,11 @@ index c362983..22b69b3 100644
 +    
 +    SSL_CTX_set_tmp_dh_callback(p_ctx, ssl_tmp_dh_callback);
 +
-     p_sess->p_ssl_ctx = p_ctx;
-     ssl_inited = 1;
-   }
+     /* Set up ALPN to check for FTP protocol intention of client. */
+     SSL_CTX_set_alpn_select_cb(p_ctx, ssl_alpn_callback, p_sess);
+     /* Set up SNI callback for an optional hostname check. */
 @@ -702,6 +781,18 @@ ssl_verify_callback(int verify_ok, X509_STORE_CTX* p_ctx)
-   return 1;
+   }
  }
  
 +#define UNUSED(x) ( (void)(x) )

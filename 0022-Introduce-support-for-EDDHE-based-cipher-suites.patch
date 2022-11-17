@@ -75,9 +75,9 @@ index 22b69b3..96bf8ad 100644
 +#endif
 +    }
 +
-     p_sess->p_ssl_ctx = p_ctx;
-     ssl_inited = 1;
-   }
+     /* Set up ALPN to check for FTP protocol intention of client. */
+     SSL_CTX_set_alpn_select_cb(p_ctx, ssl_alpn_callback, p_sess);
+     /* Set up SNI callback for an optional hostname check. */
 diff --git a/tunables.c b/tunables.c
 index 1ea7227..93f85b1 100644
 --- a/tunables.c

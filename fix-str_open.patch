@@ -5,7 +5,7 @@ diff -ruN vsftpd-3.0.3.orig/sysstr.c vsftpd-3.0.3/sysstr.c
  int
  str_open(const struct mystr* p_str, const enum EVSFSysStrOpenMode mode)
  {
--  enum EVSFSysUtilOpenMode open_mode = kVSFSysStrOpenUnknown;
+-  enum EVSFSysUtilOpenMode open_mode = kVSFSysUtilOpenUnknown;
 -  switch (mode)
 -  {
 -    case kVSFSysStrOpenReadOnly:

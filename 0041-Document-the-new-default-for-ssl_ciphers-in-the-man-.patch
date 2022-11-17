@@ -17,15 +17,15 @@ index 3ca55e4..2a7662e 100644
  security precaution as it prevents malicious remote parties forcing a cipher
  which they have found problems with.
  
--Default: AES128-SHA:DES-CBC3-SHA:DHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384
+-Default: DES-CBC3-SHA
 +By default, the system-wide crypto policy is used. See
 +.BR update-crypto-policies(8)
 +for further details.
 +
 +Default: PROFILE=SYSTEM
  .TP
- .B user_config_dir
- This powerful option allows the override of any config option specified in
+ .B ssl_sni_hostname
+ If set, SSL connections will be rejected unless the SNI hostname in the
 -- 
 2.14.4
 
