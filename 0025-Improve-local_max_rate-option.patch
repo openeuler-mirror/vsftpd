@@ -62,7 +62,7 @@ index eaba265..f1e2f69 100644
 +++ b/main.c
 @@ -40,7 +40,7 @@ main(int argc, const char* argv[])
      /* Control connection */
-     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0,
      /* Data connection */
 -    -1, 0, -1, 0, 0, 0, 0,
 +    -1, 0, -1, 0, 0, 0, 0, 0,

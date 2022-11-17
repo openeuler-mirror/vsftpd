@@ -1,8 +1,8 @@
 %define generator_dir %{_prefix}/lib/systemd/system-generators
 
 Name:          vsftpd
-Version:       3.0.3
-Release:       33
+Version:       3.0.5
+Release:       1
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -53,7 +53,6 @@ Patch29:       0029-Fix-segfault-in-config-file-parser.patch
 Patch30:       0030-Fix-logging-into-syslog-when-enabled-in-config.patch
 Patch31:       0031-Fix-question-mark-wildcard-withing-a-file-name.patch
 Patch32:       0032-Propagate-errors-from-nfs-with-quota-to-client.patch
-Patch33:       0033-Introduce-TLSv1.1-and-TLSv1.2-options.patch
 Patch34:       0034-Turn-off-seccomp-sandbox-because-it-is-too-strict.patch
 Patch35:       0035-Modify-DH-enablement-patch-to-build-with-OpenSSL-1.1.patch
 Patch36:       0036-Redefine-VSFTP_COMMAND_FD-to-1.patch
@@ -62,8 +61,6 @@ Patch38:       0038-Document-allow_writeable_chroot-in-the-man-page.patch
 Patch39:       0039-Improve-documentation-of-ASCII-mode-in-the-man-page.patch
 Patch40:       0040-Use-system-wide-crypto-policy.patch
 Patch41:       0041-Document-the-new-default-for-ssl_ciphers-in-the-man-.patch
-Patch42:       0042-When-handling-FEAT-command-check-ssl_tlsv1_1-and-ssl.patch
-Patch43:       0043-Enable-only-TLSv1.2-by-default.patch
 Patch44:       0044-Disable-anonymous_enable-in-default-config-file.patch
 Patch45:       0045-Expand-explanation-of-ascii_-options-behaviour-in-ma.patch
 Patch46:       0046-vsftpd.conf-Refer-to-the-man-page-regarding-the-asci.patch
@@ -89,6 +86,7 @@ Patch67:       0001-Fix-timestamp-handling-in-MDTM.patch
 Patch68:       0002-Drop-an-unused-global-variable.patch
 Patch69:       0001-Remove-a-hint-about-the-ftp_home_dir-SELinux-boolean.patch
 Patch70:       fix-str_open.patch
+Patch71:       vsftpd-3.0.5-enable_wc_logs-replace_unprintable_with_hex.patch
 
 Patch9000:     bugfix-change-the-default-value-of-tunable_reverse_lookup_e.patch
 
@@ -107,7 +105,7 @@ This package contains man directory manuals.
 %autosetup -p1
 
 %build
-make CFLAGS="$RPM_OPT_FLAGS -fpie -pipe -Wextra" LINK="-pie -lssl" %{?_smp_mflags}
+make CFLAGS="$RPM_OPT_FLAGS -fpie -pipe -Wextra" LINK="-pie -lssl $RPM_LD_FLAGS" %{?_smp_mflags}
 
 %install
 install -d %{buildroot}{%{_unitdir},%{generator_dir},%{_var}/ftp/pub}
@@ -155,6 +153,12 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Thu Nov 17 2022 zhouyihang <zhouyihang3@h-partners.com> - 3.0.5-1
+- Type:requirement
+- ID:NA
+- SUG:NA
+- DESC:update vsftpd to 3.0.5
+
 * Tue Jan 26 2021 orange-snn <songnannan2@huawei.com> - 3.0.3-33
 - remove Werror in build flags to fix building error.
 
