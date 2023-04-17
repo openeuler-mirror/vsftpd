@@ -2,7 +2,7 @@
 
 Name:          vsftpd
 Version:       3.0.5
-Release:       1
+Release:       2
 Summary:       It is a secure FTP server for Unix-like systems
 # OpenSSL link exception
 License:       GPLv2 with exceptions
@@ -87,6 +87,7 @@ Patch68:       0002-Drop-an-unused-global-variable.patch
 Patch69:       0001-Remove-a-hint-about-the-ftp_home_dir-SELinux-boolean.patch
 Patch70:       fix-str_open.patch
 Patch71:       vsftpd-3.0.5-enable_wc_logs-replace_unprintable_with_hex.patch
+Patch72:       vsftpd-fix-cc.patch
 
 Patch9000:     bugfix-change-the-default-value-of-tunable_reverse_lookup_e.patch
 
@@ -153,6 +154,9 @@ cp -f %{SOURCE1} ./
 %{_mandir}/man8/vsftpd.*
 
 %changelog
+* Sat Apr 15 2023 Xiaoya Huang <huangxiaoya@iscas.ac.cn> - 3.0.5-2
+- Fix CC compiler support
+
 * Thu Nov 17 2022 zhouyihang <zhouyihang3@h-partners.com> - 3.0.5-1
 - Type:requirement
 - ID:NA
